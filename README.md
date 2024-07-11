@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -71,3 +72,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # https://thingproxy.freeboard.io/fetch/
 # "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
+=======
+# Food_Delivery
+>>>>>>> b1c7bf37f5f4676cc2323183ea2faf4beaed944b
