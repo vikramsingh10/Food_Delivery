@@ -4,54 +4,40 @@ class UserClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 1,
       userInfo: {
         name: "dummy",
         location: "default",
       },
     };
-    // console.log("Child Constructor");
   }
 
   async componentDidMount() {
-    // console.log("Child mount");
-    const data = await fetch("https://api.github.com/users/akshaymarch7");
+    const data = await fetch("https://api.github.com/users/vikramsingh10");
     const json = await data.json();
-
-    this.setState({
-      userInfo: json,
-    });
+    this.setState({ userInfo: json });
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log("component did update");
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     console.log("Component will unmount");
   }
 
   render() {
-    const { name, location } = this.state.userInfo;
-    const { count } = this.state;
+    const { name, location, avatar_url } = this.state.userInfo;
 
-    // console.log("Child Render");
-
-    return ( 
-      <div className="user-card">
-        <h1>Count:{count}</h1>
-        <button
-          onClick={() => {
-            //Never update state variables directly
-            this.setState({
-              count: count + 1,
-            });
-          }}>
-          Count Increase
-        </button>
-        <h2>Name: {name}</h2>
-        <h3>Contact: 8727886262</h3>
-        <h4>Address: {location}</h4>
+    return (
+      <div className="p-5 max-w-lg mx-auto bg-gray-100 rounded-lg shadow-md text-center">
+        <h2 className="text-xl font-semibold mb-2">Name: {name}</h2>
+        <img
+          className="w-48 h-auto rounded-full mx-auto mb-4"
+          src={avatar_url}
+          alt={name}
+        />
+        <h3 className="text-lg mb-2">Contact: 1234567890</h3>
+        <h4 className="text-md text-gray-600">Address: {location}</h4>
       </div>
     );
   }
