@@ -10,6 +10,8 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+// console.log("Body Rendered", listOfRestaurants);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,7 +22,7 @@ const Body = () => {
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
       const json = await response.json();
-      console.log("Fetched Data: ", json);
+      // console.log("Fetched Data: ", json);
 
       const restaurants =
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
@@ -63,8 +65,8 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="p-4">
-      <div className="flex flex-col items-center mb-4 gap-4">
-        <div className="flex gap-4 mb-4">
+      <div className="flex justify-center items-center mb-4 gap-4">
+        <div className="flex gap-4">
           <input
             type="text"
             className="border border-gray-300 rounded-lg p-2 w-full max-w-md"
@@ -74,19 +76,17 @@ const Body = () => {
           />
           <button
             onClick={handleSearch}
-            className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-200"
-          >
+            className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-200">
             Search
           </button>
         </div>
         <button
           className="bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600 transition duration-200"
-          onClick={handleFilter}
-        >
+          onClick={handleFilter}>
           Top Rated Restaurants
         </button>
       </div>
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-start gap-4 ml-10">
         {filteredRestaurant.map((res) => (
           <Link key={res.info.id} to={"/restaurants/" + res.info.id}>
             <RestaurantCard key={res.info.id} resData={res.info} />

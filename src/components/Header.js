@@ -6,8 +6,8 @@ const Header = () => {
   const { btnName, onClick } = useLogin();
 
   return (
-    <div className="flex justify-between items-center p-4 bg-white shadow-md border-b-4 border-gray-800">
-      <div className="flex items-center">
+    <div className="flex justify-evenly items-center p-4 bg-white shadow-lg mx-2 mt-2 ">
+      <div>
         <Link to="/">
           <img
             className="w-32 h-auto cursor-pointer"
@@ -17,7 +17,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex items-center">
-        <ul className="flex space-x-4 text-lg list-none p-0 m-0">
+        <ul className="flex space-x-8 text-lg list-none p-0 m-0">
           <li>
             <Link
               to="/"
@@ -49,7 +49,7 @@ const Header = () => {
         </ul>
         <button
           onClick={onClick}
-          className="ml-4 px-4 py-2 bg-blue-500 text-white rounded transition-colors duration-300 hover:bg-blue-700">
+          className="ml-4 px-4 py-2 text-xl hover:text-blue-500 text-black rounded duration-300 hover:shadow-lg">
           {btnName}
         </button>
       </div>
