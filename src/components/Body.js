@@ -33,7 +33,7 @@ const Body = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setIsLoading(false); // Ensure loading state is updated
+      setIsLoading(false);
     }
   };
 

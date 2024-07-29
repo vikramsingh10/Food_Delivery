@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import RestaurantItemList from "./RestaurantItemList";
 
-// Component to render a single category
+
 const RestaurantCategory = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   console.log(data);
@@ -10,15 +10,12 @@ const RestaurantCategory = ({ data }) => {
     setIsOpen(!isOpen);
   };
 
-  // Check if there are nested categories
   const hasNestedCategories = data?.categories?.length > 0;
 
-  // Determine if the category is of type ItemCategory
   const isItemCategory =
     data?.["@type"] ===
     "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory";
 
-  // Determine if the category is of type NestedItemCategory
   const isNestedItemCategory =
     data?.["@type"] ===
     "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory";
