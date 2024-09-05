@@ -1,9 +1,14 @@
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { btnName, onClick } = useLogin();
+
+  //subscribing the store using a selector
+  const cartItems = useSelector((store) => store.cart.items);
+  // console.log(cartItems);
 
   return (
     <div className="flex justify-evenly items-center p-4 bg-white shadow-lg mx-2 mt-2 ">
@@ -43,7 +48,7 @@ const Header = () => {
             <Link
               to="/cart"
               className="hover:text-blue-500 transition-colors duration-300">
-              Cart
+              Cart - {cartItems.length}
             </Link>
           </li>
         </ul>

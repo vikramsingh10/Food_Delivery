@@ -9,12 +9,27 @@ const Body = () => {
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
-// console.log("Body Rendered", listOfRestaurants);
+  const [isTopRated, setIsTopRated] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    let filteredList = listOfRestaurants;
+
+    if (searchText) {
+      filteredList = filteredList.filter((res) =>
+        res.info.name.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    if (isTopRated) {
+      filteredList = filteredList.filter((res) => res.info.avgRating > 4);
+    }
+
+    setFilteredRestaurant(filteredList);
+  }, [searchText, listOfRestaurants, isTopRated]);
 
   const fetchData = async () => {
     try {
@@ -22,7 +37,6 @@ const Body = () => {
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
       const json = await response.json();
-      // console.log("Fetched Data: ", json);
 
       const restaurants =
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
@@ -37,18 +51,8 @@ const Body = () => {
     }
   };
 
-  const handleFilter = () => {
-    const filteredList = listOfRestaurants.filter(
-      (res) => res.info.avgRating > 4
-    );
-    setFilteredRestaurant(filteredList);
-  };
-
-  const handleSearch = () => {
-    const filteredList = listOfRestaurants.filter((res) =>
-      res.info.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setFilteredRestaurant(filteredList);
+  const handleFilterToggle = () => {
+    setIsTopRated((prev) => !prev);
   };
 
   const onlineStatus = useOnlineStatus();
@@ -74,16 +78,11 @@ const Body = () => {
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search for restaurants"
           />
-          <button
-            onClick={handleSearch}
-            className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-200">
-            Search
-          </button>
         </div>
         <button
-          className="bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600 transition duration-200"
-          onClick={handleFilter}>
-          Top Rated Restaurants
+          className={`rounded-lg px-4 py-2 transition duration-200 ${isTopRated ? 'bg-green-600' : 'bg-green-500'} text-white`}
+          onClick={handleFilterToggle}>
+          {isTopRated ? 'Show All Restaurants' : 'Top Rated Restaurants'}
         </button>
       </div>
       <div className="flex flex-wrap justify-start gap-4 ml-10">
